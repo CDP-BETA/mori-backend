@@ -1,6 +1,6 @@
 from flask import Flask, escape, request
 import joblib
-
+from model import get_age, get_shap
 app = Flask(__name__)
 
 known_keys = [
@@ -19,11 +19,6 @@ known_keys = [
     'male'
 ]
 
-@app.route('/')
-def hello():
-    name = request.args.get('name', 'World')
-    return f'Hello, {escape(name)}!'
-
 @app.route('/predict', methods=['POST'])
 def predict():
     req = request.get_json()
@@ -32,15 +27,16 @@ def predict():
     
     answer = req['answer']
 
-    input = []
+    req_data = []
     for key in known_keys:
         if key not in answer:
             err = '%s is missing' % key
             return {'error': err}, 400
-        input.append(answer[key])
-    
-    return {'input': input}, 200
+        req_data.append(answer[key])
+    pred_age = get_age(req_data, model)
+    shap = get_shap(req_data, model)
+    return {'pred_age': pred_age, 'shap': shap}, 200
 
 if __name__ == '__main__':
-  clf = joblib.load('/app/model.pkl')
-  app.run(debug=False, port=80, host='0.0.0.0')
+    model = joblib.load('/app/model.pkl')
+    app.run(debug=False, port=80, host='0.0.0.0')
