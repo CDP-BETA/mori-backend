@@ -4,19 +4,19 @@ import joblib
 app = Flask(__name__)
 
 known_keys = [
-    'sex',
     'pneumonia',
-    'high_blood_pressure',
+    'hypertension',
     'chest_pain',
-    'respiratory_failure',
+    'respiratory_disorder',
     'anemia',
     'diabetes',
     'hypoglycemia',
     'fever',
-    'cardiovascular_disease',
+    'mace',
     'abdominal_pain',
     'pancreatitis',
-    'spouse',
+    'married',
+    'male'
 ]
 
 @app.route('/')
