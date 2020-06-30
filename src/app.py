@@ -1,11 +1,9 @@
 from flask import Flask, escape, request
-from flask_cors import CORS
 import joblib
 
 from model import get_age, get_shap
 
 app = Flask(__name__)
-CORS(app, resources={r'*': {'origins': ['http://localhost:3008', 'https://memento-mori-zzerjae.endpoint.ainize.ai']}})
 
 known_keys = [
     'pneumonia',
