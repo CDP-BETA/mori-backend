@@ -1,10 +1,11 @@
 from flask import Flask, escape, request
-from flask_cors import CORS
+from flask.ext.cors import CORS
 import joblib
 
 from model import get_age, get_shap
 
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 
 known_keys = [
