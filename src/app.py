@@ -5,8 +5,7 @@ import joblib
 from model import get_age, get_shap
 
 app = Flask(__name__)
-app.config['CORS_HEADERS'] = 'Content-Type'
-CORS(app)
+CORS(app, resources={ r'/*': {'origins': ["*"]}}, supports_credentials=True)
 
 known_keys = [
     'pneumonia',
