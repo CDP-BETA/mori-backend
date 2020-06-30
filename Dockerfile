@@ -31,6 +31,8 @@ ADD requirements.txt /app/requirements.txt
 RUN pip install -r /app/requirements.txt
 
 ADD src/app.py /app/app.py
+ADD src/__init__.py /app/__init__.py
+ADD src/model.py /app/model.py
 ADD src/model.pkl /app/model.pkl
 
 WORKDIR /app
