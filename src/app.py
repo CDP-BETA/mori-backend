@@ -1,9 +1,13 @@
 from flask import Flask, escape, request
+from flask_cors import CORS
 import joblib
 
 from model import get_age, get_shap
 
 app = Flask(__name__)
+cors = CORS(app, resources={
+  r"/predict": {"origin": "*"},
+})
 
 known_keys = [
     'pneumonia',
