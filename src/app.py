@@ -1,11 +1,9 @@
 from flask import Flask, escape, request
-from flask_cors import CORS, cross_origin
 import joblib
 
 from model import get_age, get_shap
 
 app = Flask(__name__)
-CORS(app, resources={ r'/*': {'origins': ["*"]}}, supports_credentials=True)
 
 known_keys = [
     'pneumonia',
@@ -38,7 +36,6 @@ desease = {
 }
 
 @app.route('/predict', methods=['POST'])
-@cross_origin(headers=['Content-Type'])
 def predict():
     req = request.get_json()
     if req is None or "answer" not in req:
