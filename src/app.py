@@ -1,5 +1,5 @@
 from flask import Flask, escape, request
-from flask.ext.cors import CORS
+from flask_cors import CORS
 import joblib
 
 from model import get_age, get_shap
